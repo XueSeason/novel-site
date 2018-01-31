@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>悦读小说 - {{book.title}}</title>
+  <title>悅讀小說 - {{book.title}}</title>
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/book.css">
 </head>
@@ -17,8 +17,8 @@
       <span class="right">
         <h3 class="name">{{book.title}}</h3>
         <div>作者：{{book.writer}}</div>
-        <!-- <div>点击：102</div> -->
-        <div>分类：{{#if book.tag}}{{this}}{{else}}最新上架{{/if}}</div>
+        <!-- <div>點擊：102</div> -->
+        <div>分類：{{#if book.tag}}{{this}}{{else}}最新上架{{/if}}</div>
       </span>
     </a>
   </section>
@@ -29,7 +29,7 @@
     <ul>
       {{#each chapters}}
       <a href="/chapter/{{id}}">
-        <li><span>{{title}}</span><span class="badge">{{#if point}}收费{{else}}免费{{/if}}</span></li>
+        <li><span>{{title}}</span><span class="badge">{{#if point}}收費{{else}}免費{{/if}}</span></li>
       </a>
       {{/each}}
     </ul>
@@ -38,7 +38,7 @@
     <div id="favorite" class="left" data-status="{{#if favorite}}like{{else}}none{{/if}}">
       <img id="fav-logo" src="/img/like_{{#if favorite}}y{{else}}n{{/if}}.png" alt="favorite">收藏
     </div>
-    <div class="right"><a href="/chapter/{{firstChapterId}}">立即阅读</a></div>
+    <div class="right"><a href="/chapter/{{firstChapterId}}">立即閱讀</a></div>
   </div>
   {{> footer }}
   <script>

@@ -2,7 +2,7 @@
   <a href="/" class="logo"></a>
   <span class="right">
       {{#if user}}
-      <a href="/bookshelf" class="mybook">书架</a>
+      <a href="/bookshelf" class="mybook">書架</a>
       <a href="/account" class="user" style="background: url(http://graph.facebook.com/{{user.snsId}}/picture?type=square) no-repeat center center;background-size: contain"></a>
       {{else}}
       <a href="https://www.facebook.com/v2.11/dialog/oauth?client_id=362063270870546&redirect_uri=http://book.sarahhaa.com/v1/login/fb/callback&state=novel" class="fblogin"></a>

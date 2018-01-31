@@ -67,12 +67,12 @@ async function renderRecord (ctx) {
   const userInfo = await getInfo(ctx.user.sns, ctx.user.snsId)
   if (ctx.params.option === 'consume') {
     const rows = await recordService.getConsumeList(userInfo.id)
-    const records = rows.map(item => ({ left: moment(item.createdAt).format('YYYY-MM-DD'), right: `消费 ${item.points} 金币` }))
-    await ctx.render('record', { user: ctx.user, title: '消费记录', records })
+    const records = rows.map(item => ({ left: moment(item.createdAt).format('YYYY-MM-DD'), right: `消費 ${item.points} 金幣` }))
+    await ctx.render('record', { user: ctx.user, title: '消費記錄', records })
   } else {
     const rows = await recordService.getPayList(userInfo.id)
     const records = rows.map(item => ({ left: moment(item.createdAt).format('YYYY-MM-DD'), right: `充值 ${item.amount} 元` }))
-    await ctx.render('record', { user: ctx.user, title: '充值记录', records })
+    await ctx.render('record', { user: ctx.user, title: '充值記錄', records })
   }
 }
 

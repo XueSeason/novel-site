@@ -4,64 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>悦读小说 - 充值</title>
+  <title>悅讀小說 - 充值</title>
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/payment.css">
 </head>
 <body>
   {{> header }}
   <section class="info">
-    <div><span>当前账户:</span>&nbsp;<span>{{user.username}}</span></div>
-    <div><span>您的余额:</span>&nbsp;<span class="orange">{{formatPoint user.points}}</span></div>
+    <div><span>當前賬戶:</span>&nbsp;<span>{{user.username}}</span></div>
+    <div><span>您的餘額:</span>&nbsp;<span class="orange">{{formatPoint user.points}}</span></div>
   </section>
-  <div class="message">收费章节，每章固定 5 金币，阅读自动扣除。</div>
+  <div class="message">收費章節，每章固定 5 金幣，閱讀自動扣除。</div>
   <section class="payment">
     <div class="title">信用卡充值</div>
     <div class="group">
       <span class="item selected" data-price="5">
         <div class="price">5元</div>
-        <div class="desc">500金币</div>
-        <div class="free"><span class="orange">赠</span>&nbsp;50金币</div>
+        <div class="desc">500金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;50金幣</div>
       </span>
       <span class="item" data-price="10">
         <div class="price">10元</div>
-        <div class="desc">1000金币</div>
-        <div class="free"><span class="orange">赠</span>&nbsp;150金币</div>
+        <div class="desc">1000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;150金幣</div>
       </span>
       <span class="item" data-price="20">
         <div class="price">20元</div>
-        <div class="desc">2000金币</div>
-        <div class="free"><span class="orange">赠</span>&nbsp;300金币</div>
+        <div class="desc">2000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;300金幣</div>
       </span>
     </div>
     <div class="group">
       <span class="item" data-price="30">
         <div class="price">30元</div>
-        <div class="desc">3000金币</div>
-        <div class="free"><span class="orange">赠</span>&nbsp;500金币</div>
+        <div class="desc">3000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;500金幣</div>
       </span>
       <span class="item" data-price="40">
         <div class="price">40元</div>
-        <div class="desc">4000金币</div>
-        <div class="free"><span class="orange">赠</span>&nbsp;1000金币</div>
+        <div class="desc">4000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;1000金幣</div>
       </span>
       <span class="item" data-price="50">
         <div class="price">50元</div>
-        <div class="desc">5000金币</div>
-        <div class="free"><span class="orange">赠</span>&nbsp;2000金币</div>
+        <div class="desc">5000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;2000金幣</div>
       </span>
     </div>
     <form action="/payment" method="post" id="payment-form">
       <div class="form-row">
         <label for="card-element">
-            请输入银行卡信息
+            請輸入銀行卡信息
           </label>
         <div id="card-element">
         </div>
         <div id="card-errors" role="alert"></div>
       </div>
       <div>
-        <button class="button">确认充值</button>
+        <button class="button">確認充值</button>
       </div>
     </from>
   </section>
