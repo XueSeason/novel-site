@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>悦读小说 - {{book.title}}</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/book.css">
+</head>
+<body>
+  {{> header }}
+  {{> nav }}
+  <section class="panel">
+    <a href="#">
+      <span class="left"><img src="{{book.cover}}" alt="cover"></span>
+      <span class="right">
+        <h3 class="name">{{book.title}}</h3>
+        <div>作者：{{book.writer}}</div>
+        <!-- <div>点击：102</div> -->
+        <div>分类：{{#if book.tag}}{{this}}{{else}}最新上架{{/if}}</div>
+      </span>
+    </a>
+  </section>
+  <article class="desc">
+   {{book.desc}}
+  </article>
+  <section class="catalogue">
+    <ul>
+      {{#each chapters}}
+      <a href="/chapter/{{id}}">
+        <li><span>{{title}}</span><span class="badge">{{#if point}}收费{{else}}免费{{/if}}</span></li>
+      </a>
+      {{/each}}
+    </ul>
+  </section>
+  <div class="bottom">
+    <div id="favorite" class="left" data-status="{{#if favorite}}like{{else}}none{{/if}}">
+      <img id="fav-logo" src="/img/like_{{#if favorite}}y{{else}}n{{/if}}.png" alt="favorite">收藏
+    </div>
+    <div class="right"><a href="/chapter/{{firstChapterId}}">立即阅读</a></div>
+  </div>
+  {{> footer }}
+  <script>
+  var favBtn = document.getElementById('favorite');
+  var favLogo = document.getElementById('fav-logo');
+  favBtn.onclick = function (e) {
+    e.preventDefault();
+    if (favBtn.dataset.status === 'none') {
+      favor('add', function () {
+        favBtn.dataset.status = 'like';
+        favLogo.setAttribute('src', '/img/like_y.png');
+      });
+    } else {
+      favor('cancel', function (res) {
+        favBtn.dataset.status = 'none';
+        favLogo.setAttribute('src', '/img/like_n.png');
+      });
+    }
+  }
+  function favor (op, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/v1/book/favorite/{{firstChapterId}}/' + op);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send('bookId={{ book.id }}');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          var res = JSON.parse(xhr.responseText);
+          if (res.success) {
+            cb();
+          } else {
+            window.location.href = '/login';
+          }
+        } else {
+          console.log(xhr.status);
+        }
+      }
+    }
+  }
+  </script>
+</body>
+</html>

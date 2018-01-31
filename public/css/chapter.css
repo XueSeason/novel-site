@@ -1,0 +1,32 @@
+body {
+  background-color: #ede7da;
+}
+
+header {
+  background-color: #ede7da;
+}
+
+article {
+  padding: 8px;
+  background-color: #ede7da;
+}
+
+footer {
+  background-color: #ede7da;
+}
+
+.info {
+  padding: 0 8px;
+  font-size: 0.6rem;
+  color: #b7b7b7;
+}
+
+.more {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  margin: 8px;
+  border-top: 1px solid #d8d8d8;
+  line-height: 44px;
+}

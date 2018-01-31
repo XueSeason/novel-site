@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>悦读小说 - 记录</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/record.css">
+</head>
+<body>
+  {{> header }}
+  {{> nav }}
+  <section>
+    <h1 class="title">{{title}}</h1>
+    <ul>
+      {{#each records}}
+      <li>
+        <time>{{left}}</time><span>{{right}}</span>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+  {{> footer }}
+</body>
+</html>

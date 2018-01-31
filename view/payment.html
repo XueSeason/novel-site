@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>悦读小说 - 充值</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/payment.css">
+</head>
+<body>
+  {{> header }}
+  <section class="info">
+    <div><span>当前账户:</span>&nbsp;<span>{{user.username}}</span></div>
+    <div><span>您的余额:</span>&nbsp;<span class="orange">{{formatPoint user.points}}</span></div>
+  </section>
+  <div class="message">收费章节，每章固定 5 金币，阅读自动扣除。</div>
+  <section class="payment">
+    <div class="title">信用卡充值</div>
+    <div class="group">
+      <span class="item selected" data-price="5">
+        <div class="price">5元</div>
+        <div class="desc">500金币</div>
+        <div class="free"><span class="orange">赠</span>&nbsp;50金币</div>
+      </span>
+      <span class="item" data-price="10">
+        <div class="price">10元</div>
+        <div class="desc">1000金币</div>
+        <div class="free"><span class="orange">赠</span>&nbsp;150金币</div>
+      </span>
+      <span class="item" data-price="20">
+        <div class="price">20元</div>
+        <div class="desc">2000金币</div>
+        <div class="free"><span class="orange">赠</span>&nbsp;300金币</div>
+      </span>
+    </div>
+    <div class="group">
+      <span class="item" data-price="30">
+        <div class="price">30元</div>
+        <div class="desc">3000金币</div>
+        <div class="free"><span class="orange">赠</span>&nbsp;500金币</div>
+      </span>
+      <span class="item" data-price="40">
+        <div class="price">40元</div>
+        <div class="desc">4000金币</div>
+        <div class="free"><span class="orange">赠</span>&nbsp;1000金币</div>
+      </span>
+      <span class="item" data-price="50">
+        <div class="price">50元</div>
+        <div class="desc">5000金币</div>
+        <div class="free"><span class="orange">赠</span>&nbsp;2000金币</div>
+      </span>
+    </div>
+    <form action="/payment" method="post" id="payment-form">
+      <div class="form-row">
+        <label for="card-element">
+            请输入银行卡信息
+          </label>
+        <div id="card-element">
+        </div>
+        <div id="card-errors" role="alert"></div>
+      </div>
+      <div>
+        <button class="button">确认充值</button>
+      </div>
+    </from>
+  </section>
+  {{> footer }}
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    var itemList = document.getElementsByClassName('item');
+    var price = document.getElementsByClassName('item')[0].dataset.price;
+    for (var i = 0; i < itemList.length; i++) {
+      var itemNode = itemList[i];
+      itemNode.onclick = function () {
+        var arr = document.getElementsByClassName('item');
+        for (var j = 0; j < arr.length; j++) {
+          arr[j].classList = 'item';
+        }
+        this.classList = 'item selected';
+        price = this.dataset.price;
+      }
+    }
+    var style = {
+      base: {
+        color: '#32325d',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
+    var stripe = Stripe('{{publishableKey}}');
+    var elements = stripe.elements();
+    var card = elements.create('card', { style: style });
+    card.mount('#card-element');
+    document.getElementById('payment-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      console.log(price);
+      stripe.createToken(card).then(function (result) {
+        if (result.error) {
+          // Inform the user if there was an error
+          var errorElement = document.getElementById('card-errors')
+          errorElement.textContent = result.error.message;
+        } else {
+          // Send the token to your server
+          stripeTokenHandler(result.token)
+        }
+      });
+    }, false);
+    function stripeTokenHandler(token) {
+      // Insert the token ID into the form so it gets submitted to the server
+      var form = document.getElementById('payment-form');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'stripeToken');
+      hiddenInput.setAttribute('value', token.id);
+      form.appendChild(hiddenInput);
+      var priceInput = document.createElement('input');
+      priceInput.setAttribute('type', 'hidden');
+      priceInput.setAttribute('name', 'price');
+      priceInput.setAttribute('value', price);
+      form.appendChild(priceInput);
+      // Submit the form
+      form.submit();
+    }
+  </script>
+</body>
+</html>

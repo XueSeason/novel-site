@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>悦读小说 - 用户中心</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/account.css">
+</head>
+<body>
+  {{> header }}
+  <section>
+    <div class="info">
+      <img class="avator" src="http://graph.facebook.com/{{user.snsId}}/picture?type=square" alt="avator"><span class="name">{{user.username}}</span>
+    </div>
+    <div class="summary">
+      <span><img src="/img/readage.png" alt="readage">阅龄:{{days}}天</span>
+      <span><img src="/img/money.png" alt="money">金币:{{formatPoint user.points}}</span>
+    </div>
+  </section>
+  <section>
+    <ul>
+      <a href="/record/consume" class="item"><li><span>消费记录</span></li></a>
+      <a href="/record/charge" class="item"><li><span>充值记录</span></li></a>
+      <a href="/v1/logout" class="item"><li><button>退出登录</button></li></a>
+    </ul>
+  </section>
+  {{> footer }}
+</body>
+</html>

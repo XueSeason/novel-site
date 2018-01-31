@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>悦读小说 - 搜索</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/search.css">
+</head>
+<body>
+  {{> header }}
+  {{> nav }}
+  <section>
+    <div class="search">
+      <input id="text-input" type="text"><button id="search-btn">搜索</button>
+    </div>
+    <ul id="showcase">
+      {{#each books}}
+      <a href="/book/{{id}}">
+        <li>
+          <span class="left"><img src="{{cover}}" alt="cover"></span>
+          <span class="right"><h3 class="name">{{title}}</h3><div class="desc">{{desc}}</div></span>
+        </li>
+      </a>
+      {{/each}}
+    </ul>
+  </section>
+  {{> footer }}
+  <script>
+  var searchBtn = document.getElementById('search-btn');
+  var textInput = document.getElementById('text-input');
+  searchBtn.onclick = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/v1/book/search/' + encodeURIComponent(textInput.value));
+    xhr.send(null);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          var res = JSON.parse(xhr.responseText);
+          handler(res);
+        } else {
+          console.log(xhr.status);
+        }
+      }
+    }
+  }
+  function handler (arr) {
+    var root = document.getElementById('showcase');
+    if (arr.length === 0) {
+      root.innerHTML = '未找到结果';
+      return;
+    }
+    root.innerHTML = '';
+    for (var i = 0; i < arr.length; i++) {
+      var book = arr[i];
+      var a = document.createElement('a');
+      a.href = '/book/' + book.id;
+      var li = document.createElement('li');
+      var span0 = document.createElement('span');
+      var span1 = document.createElement('span');
+      span0.className = 'left';
+      span1.className = 'right';
+      var img = document.createElement('img');
+      var h3 = document.createElement('h3');
+      var div = document.createElement('div');
+      img.src = book.cover;
+      img.alt = 'cover';
+      h3.className = 'name';
+      div.className = 'desc';
+      h3.innerText = book.title;
+      div.innerText = book.desc;
+      span0.appendChild(img);
+      span1.appendChild(h3);
+      span1.appendChild(div);
+      li.appendChild(span0);
+      li.appendChild(span1);
+      a.appendChild(li);
+      root.appendChild(a);
+    }
+  }
+  </script>
+</body>
+</html>

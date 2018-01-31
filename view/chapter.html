@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>悦读小说 - {{book.title}}</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/chapter.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.9.0/github-markdown.min.css">
+</head>
+<body>
+  {{> header }}
+  <div class="info">{{formatDate chapter.createdAt}}更新</div>
+  <article class="markdown-body">
+  {{safeHTML chapter.content}}
+  </article>
+  <section class="more">
+    <span>{{#if pre}}<a href="/chapter/{{pre.id}}"><span>&lt;上一章</span></a>{{/if}}</span>
+    <span>{{#if next}}<a href="/chapter/{{next.id}}"><span>下一章&gt;</span></a>{{/if}}</span>
+  </section>
+  {{> footer }}
+</body>
+</html>
