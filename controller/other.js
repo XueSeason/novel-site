@@ -30,11 +30,18 @@ async function logout (ctx) {
 
 async function loginCallback (ctx) {
   const code = ctx.query.code
-  const state = ctx.query.state
+  // const state = ctx.query.state
   const uri = `https://graph.facebook.com/v2.11/oauth/access_token?client_id=${fb.clientId}&redirect_uri=${fb.callbackUri}&client_secret=${fb.clientSecret}&code=${code}`
   const { access_token: accessToken, expires_in: expire } = await rp({ uri, json: true })
   const { name, id } = await rp({ uri: `https://graph.facebook.com/me?access_token=${accessToken}`, json: true })
-  const text = encrypt(JSON.stringify({ id, sns: 'fb' }))
+  // 插入到数据库
+  console.log('access_token expire', expire)
+  const account = { id, sns: 'fb', name, maxAge: 24 * 60 * 60 * 1000 }
+  await checkin(account.sns, account.id, account.name)
+  const text = encrypt(JSON.stringify({ snsId: account.id, username: account.name, sns: account.sns, expire: new Date().valueOf() + account.maxAge + 60 * 1000 }))
+  ctx.cookies.set('user', text, { maxAge: account.maxAge, httpOnly: true, overWrite: false })
+  ctx.status = 302
+  ctx.redirect('/')
 }
 
 async function renderPayment (ctx) {
