@@ -19,18 +19,18 @@ async function deductPoint (accountId, chapterId, point) {
 async function charge (accountId, chargeId, amount) {
   const user = await Account.findById(accountId)
   let point = amount * 100
-  if (amount === 5) {
-    point += 50
-  } else if (amount === 15) {
-    point += 150
-  } else if (amount === 20) {
-    point += 300
-  } else if (amount === 30) {
+  if (amount === 100) {
+    point += 0
+  } else if (amount === 150) {
+    point += 200
+  } else if (amount === 200) {
     point += 500
-  } else if (amount === 40) {
+  } else if (amount === 300) {
     point += 1000
-  } else if (amount === 50) {
+  } else if (amount === 500) {
     point += 2000
+  } else if (amount === 1000) {
+    point += 5000
   }
   await user.update({ points: user.points + point })
   await PayRecord.create({ accountId, chargeId, amount })

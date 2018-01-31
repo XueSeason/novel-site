@@ -14,41 +14,41 @@
     <div><span>當前賬戶:</span>&nbsp;<span>{{user.username}}</span></div>
     <div><span>您的餘額:</span>&nbsp;<span class="orange">{{formatPoint user.points}}</span></div>
   </section>
-  <div class="message">收費章節，每章固定 5 金幣，閱讀自動扣除。</div>
+  <div class="message">收費章節，每章固定 10 金幣，閱讀自動扣除。</div>
   <section class="payment">
     <div class="title">信用卡充值</div>
     <div class="group">
-      <span class="item selected" data-price="5">
-        <div class="price">5元</div>
-        <div class="desc">500金幣</div>
-        <div class="free"><span class="orange">贈</span>&nbsp;50金幣</div>
+      <span class="item selected" data-price="100">
+        <div class="price">100元</div>
+        <div class="desc">10000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;0金幣</div>
       </span>
-      <span class="item" data-price="10">
-        <div class="price">10元</div>
-        <div class="desc">1000金幣</div>
-        <div class="free"><span class="orange">贈</span>&nbsp;150金幣</div>
+      <span class="item" data-price="150">
+        <div class="price">150元</div>
+        <div class="desc">15000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;200金幣</div>
       </span>
-      <span class="item" data-price="20">
-        <div class="price">20元</div>
-        <div class="desc">2000金幣</div>
-        <div class="free"><span class="orange">贈</span>&nbsp;300金幣</div>
+      <span class="item" data-price="200">
+        <div class="price">200元</div>
+        <div class="desc">20000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;500金幣</div>
       </span>
     </div>
     <div class="group">
-      <span class="item" data-price="30">
-        <div class="price">30元</div>
-        <div class="desc">3000金幣</div>
-        <div class="free"><span class="orange">贈</span>&nbsp;500金幣</div>
-      </span>
-      <span class="item" data-price="40">
-        <div class="price">40元</div>
-        <div class="desc">4000金幣</div>
+      <span class="item" data-price="300">
+        <div class="price">300元</div>
+        <div class="desc">30000金幣</div>
         <div class="free"><span class="orange">贈</span>&nbsp;1000金幣</div>
       </span>
-      <span class="item" data-price="50">
-        <div class="price">50元</div>
-        <div class="desc">5000金幣</div>
+      <span class="item" data-price="500">
+        <div class="price">500元</div>
+        <div class="desc">50000金幣</div>
         <div class="free"><span class="orange">贈</span>&nbsp;2000金幣</div>
+      </span>
+      <span class="item" data-price="1000">
+        <div class="price">1000元</div>
+        <div class="desc">100000金幣</div>
+        <div class="free"><span class="orange">贈</span>&nbsp;5000金幣</div>
       </span>
     </div>
     <form action="/payment" method="post" id="payment-form">
