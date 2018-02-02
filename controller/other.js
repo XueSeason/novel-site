@@ -19,7 +19,11 @@ async function mockLogin (ctx) {
   const text = encrypt(JSON.stringify({ snsId: account.id, username: account.name, sns: account.sns, expire: new Date().valueOf() + account.maxAge + 60 * 1000 }))
   ctx.cookies.set('user', text, { maxAge: account.maxAge, httpOnly: true, overWrite: false })
   ctx.status = 302
-  ctx.redirect('/')
+  if (ctx.refer) {
+    ctx.redirect(ctx.refer)
+  } else {
+    ctx.redirect('/')
+  }
 }
 
 async function logout (ctx) {
@@ -41,7 +45,11 @@ async function loginCallback (ctx) {
   const text = encrypt(JSON.stringify({ snsId: account.id, username: account.name, sns: account.sns, expire: new Date().valueOf() + account.maxAge + 60 * 1000 }))
   ctx.cookies.set('user', text, { maxAge: account.maxAge, httpOnly: true, overWrite: false })
   ctx.status = 302
-  ctx.redirect('/')
+  if (ctx.refer) {
+    ctx.redirect(ctx.refer)
+  } else {
+    ctx.redirect('/')
+  }
 }
 
 async function renderPayment (ctx) {
@@ -99,7 +107,11 @@ async function paymentHandler (ctx) {
     }
   }
   ctx.status = 302
-  ctx.redirect('/payment')
+  if (ctx.refer) {
+    ctx.redirect(ctx.refer)
+  } else {
+    ctx.redirect('/payment')
+  }
 }
 
 module.exports = {

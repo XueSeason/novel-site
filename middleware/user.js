@@ -14,7 +14,13 @@ async function user (ctx, next) {
       console.error(error)
     }
   }
+  if (ctx.cookies.get('refer')) {
+    ctx.refer = ctx.cookies.get('refer')
+  }
   await next()
+  if (ctx.url !== '/login' && ctx.url !== '/payment') {
+    ctx.cookies.set('refer', ctx.url, { httpOnly: true, overWrite: false })
+  }
 }
 
 module.exports = user
